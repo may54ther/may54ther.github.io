@@ -6,11 +6,8 @@ const colors = require('tailwindcss/colors')
 module.exports = {
   content: [
     './node_modules/pliny/**/*.js',
-    './app/**/*.{js,ts,jsx,tsx}',
-    './pages/**/*.{js,ts,tsx}',
-    './components/**/*.{js,ts,tsx}',
-    './layouts/**/*.{js,ts,tsx}',
-    './data/**/*.mdx',
+    './src/**/*.{js,ts,jsx,tsx}',
+    './posts/**/*.mdx',
   ],
   darkMode: 'class',
   theme: {
@@ -25,7 +22,7 @@ module.exports = {
         sans: ['var(--font-space-grotesk)', ...fontFamily.sans],
       },
       colors: {
-        primary: colors.pink,
+        primary: colors.blue,
         gray: colors.gray,
       },
       zIndex: {
