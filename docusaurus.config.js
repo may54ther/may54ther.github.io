@@ -4,22 +4,20 @@
 // There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
+import 'dotenv/config';
 import { themes as prismThemes } from 'prism-react-renderer';
-
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: '😎',
+  title: 'aha.devlog',
   // tagline: 'devlog',
   favicon: 'img/favicon.ico',
 
-  // Set the production url of your site here
-  url: 'https://may54ther.github.io',
+  url: `https://${process.env.REACT_APP_PROJECT_NAME}`,
   baseUrl: '/',
-
-  projectName: 'may54ther.github.io',
-  organizationName: 'may54ther', 
+  projectName: process.env.REACT_APP_PROJECT_NAME,
+  organizationName: process.env.REACT_APP_PROJECT_OWNER,
   trailingSlash: false,
 
   onBrokenLinks: 'throw',
@@ -29,8 +27,8 @@ const config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'ko',
+    locales: ['ko', 'en'],
   },
 
   presets: [
@@ -42,8 +40,7 @@ const config = {
           sidebarPath: './sidebars.js',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/may54ther/may54ther.github.io/tree/main/docs',
+          editUrl: `https://github.com/${process.env.REACT_APP_PROJECT_OWNER}/${process.env.REACT_APP_PROJECT_NAME}/tree/main/docs`,
         },
         blog: {
           showReadingTime: true,
@@ -54,7 +51,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/may54ther/may54ther.github.io/tree/main/blog',
+            `https://github.com/${process.env.REACT_APP_PROJECT_OWNER}/${process.env.REACT_APP_PROJECT_NAME}/tree/main/blog`,
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -70,10 +67,8 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // Replace with your project's social card
-      // image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'ahyeon.log',
+        title: 'aha.devlog',
         logo: {
           alt: 'Logo',
           src: 'img/logo.png',
@@ -85,17 +80,23 @@ const config = {
             position: 'left',
             label: 'Docs',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          { to: '/blog', label: 'Blog', position: 'left' },
         ],
       },
       footer: {
         style: 'dark',
         links: [],
-        copyright: `Copyright © ${new Date().getFullYear()} may54ther, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} ${process.env.REACT_APP_PROJECT_OWNER}, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.palenight,
         darkTheme: prismThemes.palenight,
+      },
+       algolia: {
+        appId:  process.env.REACT_APP_ALGOLIA_APP_ID,
+        apiKey:  process.env.REACT_APP_ALGOLIA_API_KEY,
+        indexName:  process.env.REACT_APP_PROJECT_NAME,
+        contextualSearch: true,
       },
     }),
 };

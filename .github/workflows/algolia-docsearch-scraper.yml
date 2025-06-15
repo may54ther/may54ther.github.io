@@ -1,0 +1,28 @@
+name: Algolia DocSearch Scraper
+
+on:
+  workflow_dispatch: 
+  # push:
+  #   branches:
+  #     - main
+
+jobs:
+  algolia-crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up .env file
+        run: |
+          echo "APPLICATION_ID=${{ secrets.REACT_APP_ALGOLIA_APP_ID }}" >> .env
+          echo "API_KEY=${{ secrets.REACT_APP_ALGOLIA_API_KEY }}" >> .env
+          echo "CONFIG=$(cat algolia.config.json | jq -r tostring)" >> .env
+        # 실제로는 config를 환경변수로 넘기지 않고, config 파일 mount 만으로 충분
+
+      - name: Run Algolia DocSearch Scraper (Docker)
+        run: |
+          docker run \
+            --env-file=.env \
+            -v ${{ github.workspace }}:/app \
+            algolia/docsearch-scraper
