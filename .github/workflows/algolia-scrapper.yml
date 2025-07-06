@@ -1,0 +1,22 @@
+name: Algolia Scraper
+
+on:
+  workflow_dispatch: 
+  # push:
+  #   branches:
+  #     - main
+
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Algolia DocSearch Scraper
+        run: |
+          docker run \
+            -e APP_ID=${{ secrets.REACT_APP_ALGOLIA_APP_ID }} \
+            -e API_KEY=${{ secrets.REACT_APP_ALGOLIA_API_KEY }} \
+            -e CONFIG="$(cat algolia.config.json | jq -r tostring)" \
+            algolia/docsearch-scraper
