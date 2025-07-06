@@ -14,10 +14,10 @@ const config = {
   tagline: '',
   favicon: 'img/favicon.ico',
 
-  url: `https://${process.env.REACT_APP_PROJECT_NAME}`,
+  url: `https://${process.env.PROJECT_NAME}`,
   baseUrl: '/',
-  projectName: process.env.REACT_APP_PROJECT_NAME,
-  organizationName: process.env.REACT_APP_PROJECT_OWNER,
+  projectName: process.env.PROJECT_NAME,
+  organizationName: process.env.PROJECT_OWNER,
   trailingSlash: false,
 
   onBrokenLinks: 'throw',
@@ -40,7 +40,7 @@ const config = {
           sidebarPath: './sidebars.js',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: `https://github.com/${process.env.REACT_APP_PROJECT_OWNER}/${process.env.REACT_APP_PROJECT_NAME}/tree/main/docs`,
+          editUrl: `https://github.com/${process.env.PROJECT_OWNER}/${process.env.PROJECT_NAME}/tree/main/docs`,
         },
         blog: {
           showReadingTime: true,
@@ -51,7 +51,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            `https://github.com/${process.env.REACT_APP_PROJECT_OWNER}/${process.env.REACT_APP_PROJECT_NAME}/tree/main/blog`,
+            `https://github.com/${process.env.PROJECT_OWNER}/${process.env.PROJECT_NAME}/tree/main/blog`,
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -86,29 +86,26 @@ const config = {
       footer: {
         style: 'dark',
         links: [],
-        copyright: `Copyright © ${new Date().getFullYear()} ${process.env.REACT_APP_PROJECT_OWNER}, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} ${process.env.PROJECT_OWNER}, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.palenight,
         darkTheme: prismThemes.palenight,
       },
        algolia: {
-        appId:  process.env.REACT_APP_ALGOLIA_APP_ID,
-        apiKey:  process.env.REACT_APP_ALGOLIA_API_KEY,
-        indexName:  process.env.REACT_APP_PROJECT_NAME,
+        appId:  process.env.ALGOLIA_APP_ID,
+        apiKey:  process.env.ALGOLIA_API_KEY,
+        indexName:  process.env.ALGOLIA_INDEX_NAME,
         contextualSearch: true,
       },
-      gtag: {
-				trackingID: "G-1VM7W626L3",
-			},
     }),
 
   customFields: {
     firebaseConfig: {
-      apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-      authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-      projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-      appId: process.env.REACT_APP_FIREBASE_APP_ID
+      appId: process.env.FIREBASE_APP_ID,
+      apiKey: process.env.FIREBASE_API_KEY,
+      authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+      projectId: process.env.FIREBASE_PROJECT_ID,
     }
   }
 };

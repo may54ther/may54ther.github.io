@@ -1,12 +1,9 @@
 {
 	"index_name": "may54ther.github.io",
-	"start_urls": [
-		"https://may54ther.github.io/docs/",
-		"https://may54ther.github.io/blog/"
-	],
+	"start_urls": ["https://may54ther.github.io/"],
 	"sitemap_urls": ["https://may54ther.github.io/sitemap.xml"],
 	"sitemap_alternate_links": true,
-	"stop_urls": [],
+	"stop_urls": ["/tests"],
 	"selectors": {
 		"lvl0": {
 			"selector": "(//ul[contains(@class,'menu__list')]//a[contains(@class, 'menu__link menu__link--sublist menu__link--active')]/text() | //nav[contains(@class, 'navbar')]//a[contains(@class, 'navbar__link--active')]/text())[last()]",
@@ -39,7 +36,5 @@
 			"url_without_anchor",
 			"type"
 		]
-	},
-	"conversation_id": ["833762294"],
-	"nb_hits": 46250
+	}
 }

@@ -1,15 +1,15 @@
 name: Deploy to GitHub Pages
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
-    paths:
-      - 'blog/**/*.md'
-      - 'blog/**/*.mdx'
-      - 'docs/**/*.md'
-      - 'docs/**/*.mdx'
+      # - deploy
+    # paths:
+    #   - 'blog/**/*.md'
+    #   - 'blog/**/*.mdx'
+    #   - 'docs/**/*.md'
+    #   - 'docs/**/*.mdx'
 
 jobs:
   build:
@@ -23,18 +23,19 @@ jobs:
         with:
           node-version: 20
           cache: yarn
-          
-      - name: Create .env file
-        run: |
-          echo "REACT_APP_ALGOLIA_APP_ID=${{ secrets.REACT_APP_ALGOLIA_APP_ID }}" >> .env
-          echo "REACT_APP_ALGOLIA_API_KEY=${{ secrets.REACT_APP_ALGOLIA_API_KEY }}" >> .env
-          echo "REACT_APP_FIREBASE_APP_ID=${{ secrets.REACT_APP_FIREBASE_APP_ID }}" >> .env
-          echo "REACT_APP_FIREBASE_API_KEY=${{ secrets.REACT_APP_FIREBASE_API_KEY }}" >> .env
-          echo "REACT_APP_FIREBASE_AUTH_DOMAIN=${{ secrets.REACT_APP_FIREBASE_AUTH_DOMAIN }}" >> .env
-          echo "REACT_APP_FIREBASE_PROJECT_ID=${{ secrets.REACT_APP_FIREBASE_PROJECT_ID }}" >> .env
-          echo "REACT_APP_PROJECT_NAME=${{ secrets.REACT_APP_PROJECT_NAME }}" >> .env
-          echo "REACT_APP_PROJECT_OWNER=${{ secrets.REACT_APP_PROJECT_OWNER }}" >> .env
 
+      - name: Create .env
+        run: |
+          echo "PROJECT_NAME=${{ secrets.PROJECT_NAME }}" >> .env
+          echo "PROJECT_OWNER=${{ secrets.PROJECT_OWNER }}" >> .env
+          echo "FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }}" >> .env
+          echo "FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}" >> .env
+          echo "FIREBASE_AUTH_DOMAIN=${{ secrets.FIREBASE_AUTH_DOMAIN }}" >> .env
+          echo "FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}" >> .env
+          echo "ALGOLIA_APP_ID=${{ secrets.ALGOLIA_APP_ID }}" >> .env
+          echo "ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }}" >> .env
+          echo "ALGOLIA_INDEX_NAME=${{ secrets.ALGOLIA_INDEX_NAME }}" >> .env
+          
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Build website
@@ -56,7 +57,7 @@ jobs:
 
     # Deploy to the github-pages environment
     environment:
-      name: production
+      name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
     runs-on: ubuntu-latest
