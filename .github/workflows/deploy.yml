@@ -1,11 +1,15 @@
 name: Deploy to GitHub Pages
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
-    # Review gh actions docs if you want to further define triggers, paths, etc
-    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
+    paths:
+      - 'blog/**/*.md'
+      - 'blog/**/*.mdx'
+      - 'docs/**/*.md'
+      - 'docs/**/*.mdx'
 
 jobs:
   build:
@@ -21,11 +25,11 @@ jobs:
           cache: yarn
           
       - name: Create .env file
-        run:
-          echo "REACT_APP_ALGOLIA_API_KEY=${{ secrets.REACT_APP_ALGOLIA_API_KEY }}" >> .env
+        run: |
           echo "REACT_APP_ALGOLIA_APP_ID=${{ secrets.REACT_APP_ALGOLIA_APP_ID }}" >> .env
-          echo "REACT_APP_FIREBASE_API_KEY=${{ secrets.REACT_APP_FIREBASE_API_KEY }}" >> .env
+          echo "REACT_APP_ALGOLIA_API_KEY=${{ secrets.REACT_APP_ALGOLIA_API_KEY }}" >> .env
           echo "REACT_APP_FIREBASE_APP_ID=${{ secrets.REACT_APP_FIREBASE_APP_ID }}" >> .env
+          echo "REACT_APP_FIREBASE_API_KEY=${{ secrets.REACT_APP_FIREBASE_API_KEY }}" >> .env
           echo "REACT_APP_FIREBASE_AUTH_DOMAIN=${{ secrets.REACT_APP_FIREBASE_AUTH_DOMAIN }}" >> .env
           echo "REACT_APP_FIREBASE_PROJECT_ID=${{ secrets.REACT_APP_FIREBASE_PROJECT_ID }}" >> .env
           echo "REACT_APP_PROJECT_NAME=${{ secrets.REACT_APP_PROJECT_NAME }}" >> .env
@@ -52,7 +56,7 @@ jobs:
 
     # Deploy to the github-pages environment
     environment:
-      name: github-pages
+      name: production
       url: ${{ steps.deployment.outputs.page_url }}
 
     runs-on: ubuntu-latest

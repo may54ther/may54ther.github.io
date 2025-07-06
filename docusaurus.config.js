@@ -10,8 +10,8 @@ import { themes as prismThemes } from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'aha.devlog',
-  // tagline: 'devlog',
+  title: 'Ahalog',
+  tagline: '',
   favicon: 'img/favicon.ico',
 
   url: `https://${process.env.REACT_APP_PROJECT_NAME}`,
@@ -68,7 +68,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'aha.devlog',
+        title: 'Ahalog',
         logo: {
           alt: 'Logo',
           src: 'img/logo.png',
@@ -98,6 +98,9 @@ const config = {
         indexName:  process.env.REACT_APP_PROJECT_NAME,
         contextualSearch: true,
       },
+      gtag: {
+				trackingID: "G-1VM7W626L3",
+			},
     }),
 
   customFields: {
