@@ -4,8 +4,12 @@ on:
   push:
     branches:
       - main
-    # Review gh actions docs if you want to further define triggers, paths, etc
-    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
+      # - deploy
+    # paths:
+    #   - 'blog/**/*.md'
+    #   - 'blog/**/*.mdx'
+    #   - 'docs/**/*.md'
+    #   - 'docs/**/*.mdx'
 
 jobs:
   build:
@@ -19,6 +23,14 @@ jobs:
         with:
           node-version: 20
           cache: yarn
+
+      - name: Create .env
+        run: |
+          echo "PROJECT_NAME=${{ secrets.PROJECT_NAME }}" >> .env
+          echo "PROJECT_OWNER=${{ secrets.PROJECT_OWNER }}" >> .env
+          echo "ALGOLIA_APP_ID=${{ secrets.ALGOLIA_APP_ID }}" >> .env
+          echo "ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }}" >> .env
+          echo "ALGOLIA_INDEX_NAME=${{ secrets.ALGOLIA_INDEX_NAME }}" >> .env
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
