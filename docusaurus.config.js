@@ -1,66 +1,53 @@
-// @ts-check
-// `@type` JSDoc annotations allow editor autocompletion and type checking
-// (when paired with `@ts-check`).
-// There are various equivalent ways to declare your Docusaurus config.
-// See: https://docusaurus.io/docs/api/docusaurus-config
-
 import "dotenv/config";
 import { themes as prismThemes } from "prism-react-renderer";
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
-/** @type {import('@docusaurus/types').Config} */
 const config = {
 	title: "Ahalog",
 	tagline: "",
 	favicon: "img/favicon.ico",
-
 	url: `https://${process.env.PROJECT_NAME}`,
 	baseUrl: "/",
-	projectName: process.env.PROJECT_NAME,
+
 	organizationName: process.env.PROJECT_OWNER,
+	projectName: process.env.PROJECT_NAME,
 	trailingSlash: false,
 
-	onBrokenLinks: "throw",
+	onBrokenLinks: "warn",
 	onBrokenMarkdownLinks: "warn",
 
 	i18n: {
-		defaultLocale: "en",
-		locales: ["en"],
+		defaultLocale: "ko",
+		locales: ["ko"],
 	},
 
 	presets: [
 		[
 			"classic",
 			/** @type {import('@docusaurus/preset-classic').Options} */
-			({
+			{
 				docs: {
+					path: "topics",
+					routeBasePath: "/topics",
 					sidebarPath: "./sidebars.js",
-					// Please change this to your repo.
-					// Remove this to remove the "edit this page" links.
-					editUrl: `https://github.com/${process.env.PROJECT_OWNER}/${process.env.PROJECT_NAME}/tree/main/docs`,
+					editUrl: `https://github.com/${process.env.PROJECT_OWNER}/${process.env.PROJECT_NAME}`,
 				},
 				blog: {
+					path: "posts",
+					routeBasePath: "/posts",
+					blogSidebarTitle: "All posts",
+					blogSidebarCount: "ALL",
+					postsPerPage: "ALL",
 					showReadingTime: true,
-					feedOptions: {
-						type: ["rss", "atom"],
-						xslt: true,
-					},
-					// Please change this to your repo.
-					// Remove this to remove the "edit this page" links.
-					editUrl: `https://github.com/${process.env.PROJECT_OWNER}/${process.env.PROJECT_NAME}/tree/main/blog`,
-					// Useful options to enforce blogging best practices
-					onInlineTags: "warn",
-					onInlineAuthors: "warn",
-					onUntruncatedBlogPosts: "warn",
 				},
 				theme: {
 					customCss: "./src/css/custom.css",
 				},
-			}),
+			},
 		],
 	],
 
 	themeConfig: {
+		/** @type {import('@docusaurus/preset-classic').ThemeConfig} */
 		metadata: [
 			{
 				name: "algolia-site-verification",
@@ -69,18 +56,19 @@ const config = {
 		],
 		navbar: {
 			title: "Ahalog",
-			// logo: {
-			// 	alt: "Logo",
-			// 	src: "img/logo.png",
-			// },
 			items: [
 				{
 					type: "docSidebar",
 					sidebarId: "docsSidebar",
-					position: "left",
-					label: "Docs",
+					to: "/topics",
+					label: "Topics",
+					position: "right",
 				},
-				{ to: "/blog", label: "Blog", position: "left" },
+				{
+					to: "/posts",
+					label: "Posts",
+					position: "right",
+				},
 			],
 		},
 		footer: {
@@ -90,15 +78,25 @@ const config = {
 				process.env.PROJECT_OWNER
 			}, Inc. Built with Docusaurus.`,
 		},
-		prism: {
-			theme: prismThemes.palenight,
-			darkTheme: prismThemes.palenight,
+		sitemap: {
+			priority: 0.5,
+			ignorePatterns: ["/tags/**"],
+			filename: "sitemap.xml",
+			createSitemapItems: async (params) => {
+				const { defaultCreateSitemapItems, ...rest } = params;
+				const items = await defaultCreateSitemapItems(rest);
+				return items.filter((item) => !item.url.includes("/page/"));
+			},
 		},
 		algolia: {
 			appId: process.env.ALGOLIA_APP_ID,
 			apiKey: process.env.ALGOLIA_API_KEY,
 			indexName: process.env.ALGOLIA_INDEX_NAME,
 			contextualSearch: true,
+		},
+		prism: {
+			theme: prismThemes.palenight,
+			darkTheme: prismThemes.palenight,
 		},
 	},
 };
