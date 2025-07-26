@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmay54ther_github_io=self.webpackChunkmay54ther_github_io||[]).push([[502],{5448:a=>{a.exports=JSON.parse('{"tags":[{"label":"CSS","permalink":"/posts/tags/css","count":1},{"label":"@media_print","permalink":"/posts/tags/media-print","count":1},{"label":"@page","permalink":"/posts/tags/page","count":1}]}')}}]);

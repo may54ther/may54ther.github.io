@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmay54ther_github_io=self.webpackChunkmay54ther_github_io||[]).push([[472],{5513:e=>{e.exports=JSON.parse('{"title":"All posts","items":[{"title":"\uc6f9 \uc778\uc1c4 (@media print, @page)","permalink":"/posts/2020/07/16/css-media-print-and-page","unlisted":false,"date":"2020-07-16T00:00:00.000Z"}]}')}}]);
