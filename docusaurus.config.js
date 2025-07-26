@@ -1,103 +1,109 @@
-// @ts-check
-// `@type` JSDoc annotations allow editor autocompletion and type checking
-// (when paired with `@ts-check`).
-// There are various equivalent ways to declare your Docusaurus config.
-// See: https://docusaurus.io/docs/api/docusaurus-config
+import * as CONFIG from './src/constants/config.js';
 
-import { themes as prismThemes } from 'prism-react-renderer';
-
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
-
-/** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: '😎',
-  // tagline: 'devlog',
-  favicon: 'img/favicon.ico',
+	projectName: CONFIG.PROJECT_NAME,
+	organizationName: CONFIG.AUTHOR_NAME,
 
-  // Set the production url of your site here
-  url: 'https://may54ther.github.io',
-  baseUrl: '/',
+	title: CONFIG.TITLE,
+	tagline: CONFIG.TAG_LINE,
+	favicon: CONFIG.FAVICON,
 
-  projectName: 'may54ther.github.io',
-  organizationName: 'may54ther', 
-  trailingSlash: false,
+	url: CONFIG.URL,
+	baseUrl: CONFIG.BASE_URL,
+	trailingSlash: false,
 
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+	i18n: {
+		defaultLocale: "ko",
+		locales: ["ko"],
+	},
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
-  },
+	presets: [
+		[
+			"classic",
+			{
+				theme: {
+					customCss: ["./src/css/custom.css"],
+				},
+				docs: {
+					routeBasePath: "docs",
+					sidebarPath: "./sidebars.js",
+					editUrl: CONFIG.EDIT_URL,
+				},
+				blog: {
+					path: "posts",
+					routeBasePath: "posts",
+					showReadingTime: true,
+					blogSidebarTitle: "All posts",
+					blogSidebarCount: "ALL",
+					postsPerPage: "ALL",
+					feedOptions: {
+						type: ["rss", "atom"],
+						xslt: true,
+					},
+					editUrl: CONFIG.EDIT_URL,
+					onUntruncatedBlogPosts: "ignore",
+				},
+				pages: {},
+				sitemap: {
+					lastmod: "date",
+					changefreq: "daily",
+					priority: 0.5,
+					ignorePatterns: ["/tags/**"],
+					filename: "sitemap.xml",
+				},
+				gtag: {
+					trackingID: CONFIG.GTAG_TRACING_ID,
+					anonymizeIP: CONFIG.GTAG_ANONYMIZE_IP
+				}
+			},
+		],
+	],
 
-  presets: [
-    [
-      'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
-        docs: {
-          sidebarPath: './sidebars.js',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/may54ther/may54ther.github.io/tree/main/docs',
-        },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/may54ther/may54ther.github.io/tree/main/blog',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
-        theme: {
-          customCss: './src/css/custom.css',
-        },
-      }),
-    ],
-  ],
+	themeConfig: {
+		algolia: {
+			appId: CONFIG.ALGOLIA_APP_ID,
+			apiKey: CONFIG.ALGOLIA_API_KEY,
+			indexName: CONFIG.ALGOLIA_INDEX_NAME,
+			contextualSearch: CONFIG.ALGOLIA_CONTEXTUAL_SEARCH,
+		},
+		prism: {
+			additionalLanguages: CONFIG.PRISM_ADDITIONAL_LANGUAGES
+		},
+		metadata: [
+			{
+				name: CONFIG.ALGOLIA_SITE_VERIFICATION_NAME,
+				content: CONFIG.ALGOLIA_SITE_VERIFICATION_CONTENT
+			},
+			{
+				name: CONFIG.GOOGLE_SITE_VERIFICATION_NAME,
+				content: CONFIG.GOOGLE_SITE_VERIFICATION_CONTENT
+			},
+		],
+		navbar: {
+			title: CONFIG.TITLE,
+			hideOnScroll: true,
+			items: [
+				{
+					to: "/docs",
+					label: "Docs",
+					position: "right",
+					type: "docSidebar",
+					sidebarId: "docsSidebar",
+				},
+				{
+					to: "/posts",
+					label: "Archive",
+					position: "right",
+				},
+			],
+		},
+		footer: {
+			style: "dark",
+			links: [],
+			copyright: CONFIG.COPYRIGHT,
+		},
 
-  themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
-      // Replace with your project's social card
-      // image: 'img/docusaurus-social-card.jpg',
-      navbar: {
-        title: 'ahyeon.log',
-        logo: {
-          alt: 'Logo',
-          src: 'img/logo.png',
-        },
-        items: [
-          {
-            type: 'docSidebar',
-            sidebarId: 'docsSidebar',
-            position: 'left',
-            label: 'Docs',
-          },
-          {to: '/blog', label: 'Blog', position: 'left'},
-        ],
-      },
-      footer: {
-        style: 'dark',
-        links: [],
-        copyright: `Copyright © ${new Date().getFullYear()} may54ther, Inc. Built with Docusaurus.`,
-      },
-      prism: {
-        theme: prismThemes.palenight,
-        darkTheme: prismThemes.palenight,
-      },
-    }),
+	},
 };
 
-export default config;
+export default config
