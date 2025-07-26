@@ -1,4 +1,4 @@
-import * as CONFIG from './src/constants/config.js';
+import * as CONFIG from "./src/constants/config.js";
 
 const config = {
 	projectName: CONFIG.PROJECT_NAME,
@@ -30,8 +30,8 @@ const config = {
 					editUrl: CONFIG.EDIT_URL,
 				},
 				blog: {
-					path: "posts",
-					routeBasePath: "posts",
+					path: "blog",
+					routeBasePath: "/",
 					showReadingTime: true,
 					blogSidebarTitle: "All posts",
 					blogSidebarCount: "ALL",
@@ -53,8 +53,8 @@ const config = {
 				},
 				gtag: {
 					trackingID: CONFIG.GTAG_TRACING_ID,
-					anonymizeIP: CONFIG.GTAG_ANONYMIZE_IP
-				}
+					anonymizeIP: CONFIG.GTAG_ANONYMIZE_IP,
+				},
 			},
 		],
 	],
@@ -67,16 +67,16 @@ const config = {
 			contextualSearch: CONFIG.ALGOLIA_CONTEXTUAL_SEARCH,
 		},
 		prism: {
-			additionalLanguages: CONFIG.PRISM_ADDITIONAL_LANGUAGES
+			additionalLanguages: CONFIG.PRISM_ADDITIONAL_LANGUAGES,
 		},
 		metadata: [
 			{
 				name: CONFIG.ALGOLIA_SITE_VERIFICATION_NAME,
-				content: CONFIG.ALGOLIA_SITE_VERIFICATION_CONTENT
+				content: CONFIG.ALGOLIA_SITE_VERIFICATION_CONTENT,
 			},
 			{
 				name: CONFIG.GOOGLE_SITE_VERIFICATION_NAME,
-				content: CONFIG.GOOGLE_SITE_VERIFICATION_CONTENT
+				content: CONFIG.GOOGLE_SITE_VERIFICATION_CONTENT,
 			},
 		],
 		navbar: {
@@ -84,16 +84,16 @@ const config = {
 			hideOnScroll: true,
 			items: [
 				{
+					to: "/",
+					label: "Blog",
+					position: "right",
+				},
+				{
 					to: "/docs",
 					label: "Docs",
 					position: "right",
 					type: "docSidebar",
 					sidebarId: "docsSidebar",
-				},
-				{
-					to: "/posts",
-					label: "Archive",
-					position: "right",
 				},
 			],
 		},
@@ -102,8 +102,7 @@ const config = {
 			links: [],
 			copyright: CONFIG.COPYRIGHT,
 		},
-
 	},
 };
 
-export default config
+export default config;

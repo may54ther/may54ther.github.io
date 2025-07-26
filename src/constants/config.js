@@ -19,7 +19,7 @@ export const GTAG_ANONYMIZE_IP = true
 export const ALGOLIA_SITE_VERIFICATION_NAME = "algolia-site-verification"
 export const ALGOLIA_SITE_VERIFICATION_CONTENT = "735DCF2730EE4F05"
 export const ALGOLIA_APP_ID = "D8XWCU9C9N"
-export const ALGOLIA_API_KEY = "598525915b572c056c51a2367c2df29f"
+export const ALGOLIA_API_KEY = "ebc986f59fdc163c1a6214d279676dcb"
 export const ALGOLIA_INDEX_NAME = "may54ther.github.io"
 export const ALGOLIA_CONTEXTUAL_SEARCH = true
 
