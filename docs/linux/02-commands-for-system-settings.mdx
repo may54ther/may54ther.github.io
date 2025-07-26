@@ -1,0 +1,57 @@
+---
+title: 기본 시스템, 입력 장치 설정
+authors: "may54ther"
+tags:
+    - CheatSheet
+    - Linux
+---
+
+## 기본 시스템 설정
+
+### 시간 설정
+
+```sh
+sudo timedatectl set-timezone Asia/Seoul
+sudo hwclock --systohc
+```
+
+### 기본 터미널 변경
+
+```sh
+sudo update-alternatives --config x-terminal-emulator
+```
+
+### 기본 디렉터리명 변경
+
+```sh
+sudo nano ~/.config/user-dirs.dirs
+```
+
+## 입력 장치 설정
+
+### 키보드 설정
+
+-   Keycode 확인
+
+```sh
+xev
+xmodmap -pk | grep [KEY_CODE]
+```
+
+-   전체 키 매핑 확인
+
+```sh
+sudo vim ~/.Xmodmap
+```
+
+-   `한/영`, `한자` 키 변경
+
+```sh
+sudo vim /usr/share/X11/xkb/keycodes/evdev
+
+# 다음과 같이 변경
+//<HNGL> = 130; 	// Hangul Latin toggle
+<HNGL> = 108; 		// 추가
+// <HJCV> = 131;    // Hangul to Hanja conversion
+<HJCV> = 105;  		// 추가
+```

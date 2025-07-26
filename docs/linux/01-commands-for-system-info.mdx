@@ -1,0 +1,121 @@
+---
+title: 운영체제, 커널, 하드웨어 정보 조회
+authors: "may54ther"
+tags:
+    - CheatSheet
+    - Linux
+---
+
+## 운영체제 및 커널 정보
+
+### 운영체제 정보
+
+```sh
+lsb_release -a
+```
+
+### 커널 정보
+
+```sh
+uname -a
+```
+
+### 호스트 정보
+
+```sh
+hostnamectl
+```
+
+### 드라이버 모듈 정보
+
+```sh
+lsmod
+```
+
+## 하드웨어 정보
+
+### 전체 하드웨어 정보
+
+```sh
+sudo lshw
+sudo lshw -class [cpu|memory|storage|...]
+```
+
+### CPU 정보
+
+```sh
+# 요약 정보
+lscpu
+# 상세 정보
+cat /proc/cpuinfo
+grep -c processor /proc/cpuinfo
+grep "physical id" /proc/cpuinfo | sort -u | wc -l
+grep "cpu cores" /proc/cpuinfo | tail -1
+```
+
+### GPU 정보
+
+```sh
+lspci | grep -i VGA
+lspci -v -s [버스 주소]
+```
+
+### 메모리 정보
+
+```sh
+free -h               # 사용량
+vmstat -s             # 요약 정보
+cat /proc/meminfo     # 상세 정보
+```
+
+### 디스크 정보
+
+```sh
+# 파일 시스템 단위
+df
+df -h                 # 읽기 쉬운 형식
+df -B MB              # MB 단위
+
+# 디렉토리 단위
+du [경로]
+du -h [경로]           # 읽기 쉬운 형식
+du -BM [경로]          # MB 단위
+```
+
+### 블록 장치 정보
+
+```sh
+lsblk
+cat /proc/partitions  # 파티션 목록
+cat /proc/mounts      # 마운트 정보
+```
+
+### PCI 장치 정보
+
+```sh
+lspci
+lspci -v              # 상세 정보
+lspci -nn             # 장치 ID 포함
+lspci -k              # 커널 드라이버 정보 포함
+
+cat /proc/bus/pci/devices
+cat /proc/bus/ioports
+cat /proc/bus/iomem
+```
+
+### USB 장치 정보
+
+```sh
+lsusb
+lsusb -v              # 상세 정보
+lsusb -t              # 트리 형식 (허브 구조 표시)
+
+cat /proc/devices
+cat /proc/bus/input/devices
+```
+
+### SCSI 장치 정보
+
+```sh
+cat /proc/scsi/scsi
+```

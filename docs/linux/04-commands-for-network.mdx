@@ -1,0 +1,152 @@
+---
+title: 네트워크, Wifi
+authors: "may54ther"
+tags:
+    - CheatSheet
+    - Linux
+---
+
+## WiFi 설정
+
+```sh
+# 연결된 와이파이 목록 조회
+nmcli con show
+
+# 네트워크 디바이스명 조회
+nmcli c
+
+# 숨겨진 네트워크 추가
+nmcli c add type wifi con-name '[WIFI명]' ifname [디바이스명] ssid '[WIFI명]'
+nmcli c modify '[WIFI명]' wifi-sec.key-mgmt wpa-psk wifi-sec.psk '[암호]'
+```
+
+## 네트워크 설정
+
+### ifupdown
+
+```sh
+sudo nano /etc/network/interfaces
+```
+
+-   예시
+
+```yml
+source /etc/network/interfaces.d/*
+
+auto lo
+iface lo inet loopback
+
+# 이더넷 수동 설정
+auto ens3
+iface ens3 inet static
+	address 172.16.3.109          # 원하는 IP
+	netmask 255.255.240.0         # 서브넷 마스크
+	gateway 172.16.0.1            # 게이트웨이 (공유기 주소)
+	dns-nameservers 8.8.8.8       # DNS 서버 (Google Public DNS)
+```
+
+-   적용
+
+```sh
+systemctl restart networking
+```
+
+### systemd-networkd
+
+```sh
+sudo nano /etc/systemd/network/*.network
+```
+
+-   설정
+
+```sh
+[Match]
+Name=eth0
+
+[Network]
+Address=192.168.1.100/24
+Gateway=192.168.1.1
+DNS=8.8.8.8
+```
+
+-   확인
+
+```sh
+networkctl status
+networkctl status [디바이스명]
+networkctl list
+```
+
+### NetworkManager
+
+```sh
+# nmcli
+nmcli connection add type ethernet ifname eth0 con-name my-ethernet ipv4.addresses 192.168.1.100/24 gw4 192.168.1.1 nmcli connection up my-ethernet
+
+# nmtui
+# 해당 명령어를 입력하면 네트워크 설정을 할 수 있는 UI가 터미널에 표시
+```
+
+-   적용
+
+```sh
+systemctl restart NetworkManager
+```
+
+### Netplan
+
+> `ubuntu 17.10` 이상, 기본 네트워크 설정 관리자
+
+```sh
+sudo nano /etc/netplan/*.yml
+```
+
+#### DHCP
+
+```yml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+	eth0:
+	  dhcp4: true
+	  dhcp-identifier: mac
+```
+
+#### Static IP
+
+```yml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+	eth0:
+	  addresses:
+		- 192.168.1.100/24
+	  gateway4: 192.168.1.1
+	  nameservers:
+		addresses:
+		  - 168.126.63.1
+		  - 8.8.8.8
+		  - 8.8.4.4
+```
+
+#### Wifi
+
+```yml
+network:
+  version: 2
+  renderer: NetworkManager
+  wifis:
+	wlan0:
+	  dhcp4: true
+	  access-points:
+		"MyWiFi":
+		  password: "mypassword"
+```
+
+-   적용
+
+```sh
+sudo netplan apply
+```

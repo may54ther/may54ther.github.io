@@ -1,0 +1,182 @@
+---
+title: 기타
+authors: "may54ther"
+tags:
+    - CheatSheet
+    - Linux
+---
+
+## 시스템 운영
+
+### 프로세스 조회
+
+```sh
+# '프로세스명'으로 조회
+ps -ef | grep [프로세스명]
+
+# '포트'로 조회
+netstat -nltp | grep [포트]
+netstat -nltp | grep LISTEN | grep [포트]
+```
+
+### 방화벽
+
+```sh
+sudo iptables -I INPUT  -p tcp --dport 443 -j ACCEPT
+sudo iptables -I INPUT  -p tcp --dport 3001 -j ACCEPT
+sudo iptables -I INPUT  -p udp --dport 53 -j ACCEPT
+sudo iptables -I OUTPUT -p tcp --dport 3001 -j ACCEPT
+sudo iptables -I OUTPUT  -p udp --dport 53 -j ACCEPT
+sudo iptables -I OUTPUT  -p tcp --dport 53 -j ACCEPT
+```
+
+### 서비스
+
+-   설정 파일
+
+```sh
+cd /etc/systemd/system
+touch {SERVICE_NAME}.service
+```
+
+-   재시동시에도 자동 실행되도록 하기 위해서 아래 명령어로 서비스 등록
+
+```sh
+systemctl enabled {SERVICE_NAME}
+```
+
+-   실행
+
+```sh
+# service
+service 서비스명 {start|restart|stop|status}
+
+# systemctl
+sudo systemctl {start|restart|stop|status} 서비스명
+```
+
+---
+
+## 명령어
+
+### bash
+
+```sh
+# `sudo`로 실행
+sudo bash -c "명령어"
+sudo bash -c "cd /root && ls"
+```
+
+### apt, apt-get
+
+```sh
+apt-cache search [패키지명] [검색어]
+apt search [패키지명] [검색어]
+
+apt list [패키지명]
+apt list -upgradable
+apt list --installed
+apt list [패키지명] --installed
+```
+
+### tar (압축 및 해제)
+
+```sh
+# .tar
+tar -cvf [파일명.tar] [폴더명]
+tar -xvf [파일명.tar]
+
+# .tar.gz
+tar -zcvf [파일명.tar.gz] [폴더명]
+tar -zxvf [파일명.tar.gz]
+```
+
+### tc (traffic control; 트래픽 제어)
+
+-   dev eth0`: 사용할 네트워크 인터페이스 (필요시`ip a` 명령어로 확인)
+-   rate 1mbit` : 제한할 속도
+-   burst` : 임시 버스트 허용량
+-   latency` : 최대 지연 허용시간
+
+```sh
+# 조회
+ip link
+# 네트워크 속도 제한
+sudo tc qdisc add dev {NETWORK_INTERFACE} root tbf rate 2mbit burst 32kbit latency 100ms
+# 네트워크 속도 제한 제거
+sudo tc qdisc del dev {NETWORK_INTERFACE} root
+```
+
+### rsync
+
+```sh
+rsync -av /from/ /to/
+rsync -av --delete /from/ /to/
+rsync -av --ignore-existing /from/ /to/
+# 텍스트 파일로 시뮬레이션 결과 출력
+rsync -av  --out-format='%n' --dry-run /from/ /to/ > ~/DIFF_$(date +"%Y%m%d%H%M%S").txt
+rsync -av --out-format='%n' --dry-run --exclude='.svn/' --exclude='lib/python/*' /from/ /to/ > ~/DIFF_$(date +"%Y%m%d%H%M%S").txt
+rsync -av --out-format='%n' --dry-run --exclude-from='exclude.txt' /from/ /to/ > ~/DIFF_$(date +"%Y%m%d%H%M%S").txt
+```
+
+-   `-a` : 아카이브 모드 (권한, 소유자, 타임스탬프 보존 등)
+-   `-v` : 상세 출력 (무엇이 복사되는지 출력)
+-   `--delete`: from 폴더에 없는 파일을 B 폴더에서 삭제
+-   `--ignore-existing` : to 폴더에 이미 있는 파일은 무시하고, 없는 파일만 복사
+-   `--out-format='%n'` : 파일 이름만 출력
+-   `--dry-run` : 실제 복사를 하지 않고, 어떤 파일이 복사될지 시뮬레이션만 수행
+-   `--exclude='*.log'`: 특정 파일/폴더 제외
+-   `--exclude-from='exclude.txt'`: 여러 패턴을 텍스트 파일로 지정하여 특정 파일/폴더 들을 제외
+
+---
+
+## Errors
+
+#### apt, apt-get 오류
+
+-   `CASE 1` Could not get lock /var/lib/dpkg/lock-frontend
+
+    ```sh
+    sudo killall apt apt-get
+
+    sudo rm /var/lib/apt/lists/lock
+    sudo rm /var/cache/apt/archives/lock
+    sudo rm /var/lib/dpkg/lock*
+
+    sudo dpkg --configure -a
+    ```
+
+-   `CASE 2` E: Release file for http://kr.archive.ubuntu.com/ubuntu/dists/focal-updates/InRelease is not valid yet (invalid for another 48분 5초). Updates for this repository will not be applied.
+
+    ```sh
+    sudo hwclock --hctosys
+    ```
+
+#### terminator 오류
+
+> ERROR: broadcast 시 값이 두번 입력되는 현상
+
+```sh
+sudo vim /usr/share/terminator/terminator
+```
+
+-   파일의 내용을 다음과 같이 수정한다.
+
+```py
+# /usr/share/terminator/terminator
+if __name__ == '__main__':
+	# Workaround for IBus intefering with broadcast when using dead keys
+	# Environment also needs IBUS_DISABLE_SNOOPER=1, or double chars appear
+	# in the receivers.
+	username = pwd.getpwuid(os.getuid()).pw_name
+	# AS-IS (original)
+	# ibus_running = [p for p in psutil.process_iter() if p.name == 'ibus-daemon' and p.username == username]
+	# TO-BE (fixed)
+	ibus_running = [p for p in psutil.process_iter(['name', 'username']) if p.info['name'] == 'ibus-daemon' and p.info['username'] == username]
+	ibus_running = len(ibus_running) > 0
+	if ibus_running:
+		# AS-IS (original)
+	    # os.environ['IBUS_DISABLE_SNOOPER']='1'
+		# TO-BE (fixed)
+	    os.environ['IBUS_DISABLE_SNOOPER']='0'
+```
