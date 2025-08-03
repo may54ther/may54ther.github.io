@@ -1,0 +1,47 @@
+---
+title: '리눅스 종류 (Debian, Red Hat)'
+authors: 'may54ther'
+created_at: 2025-08-03
+tags: ['#Linux', '#Note']
+---
+
+## 데비안 계열
+
+데비안 계열의 대표 배포판은 다음과 같다.
+- **Debian**
+	- 안정성, 보안을 최우선으로 설계한 배포판
+	- 릴리즈 주기가 느리며 보수적인 패키지 업데이트를 지향
+	- `Raspbian`, `Kali Linux` , `Ubuntu` 등
+- **Ubuntu**
+	- 데비안 기반의 사용자 친화적인 배포판
+	- 최신 커널과 하드웨어 지원 속도가 빠름
+	- `Linux Mint`, `Pop!_OS` 등
+### 패키지 관리 시스템
+`.deb` 확장자의 패키지 파일 포맷
+- 단일 패키지 설치: `dpkg`
+- 저장소에서 의존성 포함한 패키지 설치: `apt`, `apt-get`
+	- `/etc/apt/source.list`
+	- `/etc/apt/source.list.d/*.list`
+
+## 레드햇 계열
+
+[Red Hat](https://www.redhat.com/) 계열의 대표 배포판은 다음과 같다.
+- **RHEL**(Red Hat Enterprise Linux) 💸
+	- 기업용 유료 배포판
+	- 안정성, 기술 지원이 핵심
+- **Fedora**
+	- Red Hat의 테스트/최신 기능을 실험하기 위한 배포판
+- **CentOS**(Community Enterprise Operating System)
+	- REHL의 소스 코드를 기반으로 만들어진 무료 배포판
+	- 2021년 종료, 대안으로는 Rocky Linux, AlmaLinux 가 있음
+- **Rocky Linux**
+	- RHEL 의 소스 코드를 기반으로 만들어진 무료 배포판
+	- CentOS 종료 이후 대안으로 떠오르고 있음
+### 패키지 관리 시스템
+`.rpm` 확장자의 패키지 파일 포맷
+- 단일 패키지 설치: `rpm`
+- 저장소에서 의존성 포함한 패키지 설치: `yum`(RHEL 7), `dnf`(RHEL 8+)
+	- `/etc/yum.repos.d/*.repo`
+
+---
+- [Ubuntu Linux에 deb 패키지로 배포하기 : 2편(상)](https://devocean.sk.com/blog/techBoardDetail.do?ID=166656&boardType=techBlog)

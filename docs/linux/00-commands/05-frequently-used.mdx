@@ -1,15 +1,13 @@
 ---
 title: 기타
-authors: "may54ther"
-tags:
-    - CheatSheet
-    - Linux
+authors: 'may54ther'
+created_at: '2025-07-26'
+tags: ['#CheatSheet', '#Linux']
 ---
 
 ## 시스템 운영
 
 ### 프로세스 조회
-
 ```sh
 # '프로세스명'으로 조회
 ps -ef | grep [프로세스명]
@@ -18,49 +16,26 @@ ps -ef | grep [프로세스명]
 netstat -nltp | grep [포트]
 netstat -nltp | grep LISTEN | grep [포트]
 ```
-
-### 방화벽
-
-```sh
-sudo iptables -I INPUT  -p tcp --dport 443 -j ACCEPT
-sudo iptables -I INPUT  -p tcp --dport 3001 -j ACCEPT
-sudo iptables -I INPUT  -p udp --dport 53 -j ACCEPT
-sudo iptables -I OUTPUT -p tcp --dport 3001 -j ACCEPT
-sudo iptables -I OUTPUT  -p udp --dport 53 -j ACCEPT
-sudo iptables -I OUTPUT  -p tcp --dport 53 -j ACCEPT
-```
-
 ### 서비스
-
--   설정 파일
-
+설정 파일
 ```sh
-cd /etc/systemd/system
-touch {SERVICE_NAME}.service
+sudo nano /etc/systemd/system/*.service
 ```
-
--   재시동시에도 자동 실행되도록 하기 위해서 아래 명령어로 서비스 등록
-
+명령어
 ```sh
-systemctl enabled {SERVICE_NAME}
-```
+sudo systemctl enable [서비스명]
+sudo systemctl disable [서비스명]
 
--   실행
-
-```sh
-# service
-service 서비스명 {start|restart|stop|status}
+# 서비스 실행
+service [서비스명] {start|restart|stop|status}
 
 # systemctl
-sudo systemctl {start|restart|stop|status} 서비스명
+sudo systemctl {start|restart|stop|status} [서비스명]
 ```
 
 ---
-
 ## 명령어
-
 ### bash
-
 ```sh
 # `sudo`로 실행
 sudo bash -c "명령어"
@@ -68,7 +43,6 @@ sudo bash -c "cd /root && ls"
 ```
 
 ### apt, apt-get
-
 ```sh
 apt-cache search [패키지명] [검색어]
 apt search [패키지명] [검색어]
@@ -80,7 +54,6 @@ apt list [패키지명] --installed
 ```
 
 ### tar (압축 및 해제)
-
 ```sh
 # .tar
 tar -cvf [파일명.tar] [폴더명]
@@ -91,24 +64,7 @@ tar -zcvf [파일명.tar.gz] [폴더명]
 tar -zxvf [파일명.tar.gz]
 ```
 
-### tc (traffic control; 트래픽 제어)
-
--   dev eth0`: 사용할 네트워크 인터페이스 (필요시`ip a` 명령어로 확인)
--   rate 1mbit` : 제한할 속도
--   burst` : 임시 버스트 허용량
--   latency` : 최대 지연 허용시간
-
-```sh
-# 조회
-ip link
-# 네트워크 속도 제한
-sudo tc qdisc add dev {NETWORK_INTERFACE} root tbf rate 2mbit burst 32kbit latency 100ms
-# 네트워크 속도 제한 제거
-sudo tc qdisc del dev {NETWORK_INTERFACE} root
-```
-
 ### rsync
-
 ```sh
 rsync -av /from/ /to/
 rsync -av --delete /from/ /to/

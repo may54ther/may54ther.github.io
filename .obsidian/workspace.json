@@ -13,13 +13,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/linux/01-debian-and-red-hat.mdx",
-                "mode": "preview",
+                "file": "docs/linux/00-commands/04-network-settings.mdx",
+                "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "01-debian-and-red-hat"
+              "title": "04-network-settings"
             }
           }
         ]
@@ -91,8 +91,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 323.5,
-    "collapsed": true
+    "width": 323.5
   },
   "right": {
     "id": "c58c500e134a5f7b",
@@ -160,6 +159,7 @@
   },
   "active": "1276ba3936b2f365",
   "lastOpenFiles": [
+    "docs/linux/01-debian-and-red-hat.mdx",
     "docs/linux/00-commands/05-frequently-used.mdx",
     "docs/linux/00-commands/05-.mdx",
     "docs/linux/00-commands/06-error-fixed.mdx",
@@ -171,7 +171,6 @@
     "docs/linux/00-commands/01-system-settings.mdx",
     "docs/linux/00-commands/01-.mdx",
     "docs/linux/00-commands/attachments/linux_user_group_permission.md",
-    "docs/linux/00-commands/attachments",
     "docs/linux/00-linux.md",
     "blog/2025/08-03-.md",
     "docs/linux/d/01-commands-for-system-info 1.md",

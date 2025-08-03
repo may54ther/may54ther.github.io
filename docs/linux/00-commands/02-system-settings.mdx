@@ -1,0 +1,84 @@
+---
+title: '기본 시스템 설정'
+authors: 'may54ther'
+created_at: '2025-07-26'
+tags: ['#CheatSheet', '#Linux']
+---
+
+## 기본 시스템 설정
+### 시간 설정
+```sh
+sudo timedatectl set-timezone Asia/Seoul
+sudo hwclock --systohc
+```
+
+### 기본 프로그램 변경
+> `update-alternatives`는 `/etc/alternatives/` 아래에 있는 시스템 대체 링크 관리 도구
+```sh
+# terminal
+sudo update-alternatives --config x-terminal-emulator
+
+# editor
+sudo update-alternatives --config editor
+
+# python, python3
+sudo update-alternatives --config python
+sudo update-alternatives --config python3
+```
+
+### 사용자 디렉터리 이름 설정
+```sh
+sudo nano ~/.config/user-dirs.dirs
+```
+
+### 언어 및 로케일 설정
+```
+sudo dpkg-reconfigure locales
+sudo localectl set-locale LANG=ko_KR.UTF-8
+```
+
+### 호스트 이름 설정
+```sh
+sudo hostnamectl set-hostname 호스트명
+sudo nano /etc/hosts
+```
+
+---
+## 입력 장치 설정
+
+### 키코드 및 매핑 확인
+```sh
+xev                            # 키코드 확인
+xmodmap -pk | grep [KEY_CODE]  # 현재 키 매핑 확인
+```
+### 사용자 키맵 정의
+```sh
+sudo vim ~/.Xmodmap
+```
+
+### 한/영, 한자 키 변경 (evdev)
+```sh
+sudo vim /usr/share/X11/xkb/keycodes/evdev
+```
+다음과 같이 수정한다.
+```
+//<HNGL> = 130;  // Hangul Latin toggle
+<HNGL> = 108;
+
+//<HJCV> = 131;  // Hangul to Hanja conversion
+<HJCV> = 105;
+```
+
+---
+## 패키지 관리 및 정리
+> Debian 계열에서 사용하는 명령어
+### 불필요한 패키지 및 캐시 정리
+```sh
+sudo apt autoremove --purge
+sudo apt clean
+```
+### 업데이트 및 업그레이드
+```sh
+sudo apt update
+sudo apt upgrade
+```

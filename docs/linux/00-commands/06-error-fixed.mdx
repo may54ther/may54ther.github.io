@@ -1,0 +1,51 @@
+---
+title: 오류 해결
+authors: 'may54ther'
+created_at: '2025-08-03'
+tags: ['#CheatSheet', '#Linux']
+---
+## 패키지 설치 오류
+
+### Could not get lock /var/lib/dpkg/lock-frontend
+```sh
+sudo killall apt apt-get
+
+sudo rm /var/lib/apt/lists/lock
+sudo rm /var/cache/apt/archives/lock
+sudo rm /var/lib/dpkg/lock*
+
+sudo dpkg --configure -a
+```
+### Release file for ... is not valid yet. Updates for this repository will not be applied.
+```sh
+sudo hwclock --hctosys
+```
+
+---
+## Terminator 오류
+
+### broadcast 시 값이 두번 입력되는 현상
+```sh
+sudo nano /usr/share/terminator/terminator
+```
+
+  파일의 내용을 다음과 같이 수정한다.
+```py
+# /usr/share/terminator/terminator
+# ... 
+if __name__ == '__main__':
+	# Workaround for IBus intefering with broadcast when using dead keys
+	# Environment also needs IBUS_DISABLE_SNOOPER=1, or double chars appear
+	# in the receivers.
+	username = pwd.getpwuid(os.getuid()).pw_name
+	# AS-IS: Original
+	# ibus_running = [p for p in psutil.process_iter() if p.name == 'ibus-daemon' and p.username == username]
+	# TO-BE: Fixed
+	ibus_running = [p for p in psutil.process_iter(['name', 'username']) if p.info['name'] == 'ibus-daemon' and p.info['username'] == username]
+	ibus_running = len(ibus_running) > 0
+	if ibus_running:
+		# AS-IS: Original
+		# os.environ['IBUS_DISABLE_SNOOPER']='1'
+		# TO-BE: Fixed
+		os.environ['IBUS_DISABLE_SNOOPER']='0'
+```

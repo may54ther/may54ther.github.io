@@ -1,0 +1,261 @@
+---
+title: 네트워크, 방화벽 설정
+authors: 'may54ther'
+created_at: '2025-07-26'
+tags: ['#CheatSheet', '#Linux']
+---
+
+## 네트워크 설정
+### systemd-networkd
+> `systemd`에서 제공하는 네트워크 관리자로 서버에서 사용되는 방식
+```sh
+sudo nano /etc/systemd/network/[인터페이스명].network
+```
+사용 예시
+```sh
+[Match]
+Name=eth0
+
+[Network]
+Address=192.168.1.100/24
+Gateway=192.168.1.1
+DNS=8.8.8.8
+```
+=확인
+```sh
+networkctl status
+networkctl status [디바이스명]
+networkctl list
+```
+
+## ifupdown
+> `Ubuntu 16.04` 이하, `Debian` 계열의 전통적인 방식
+```sh
+sudo nano /etc/network/interfaces
+```
+#### 사용 예시
+DHCP
+```yml
+auto eth0
+iface eth0 inet dhcp
+```
+Static IP
+```yml
+auto lo
+iface lo inet loopback
+
+# 192.168.122.x
+auto eth0
+iface eth0 inet static
+  address 192.168.0.10
+  netmask 255.255.255.0
+  gateway 192.168.0.1
+  dns-nameservers 168.126.63.1 8.8.8.8
+```
+적용
+```sh
+sudo systemctl restart networking
+```
+
+### netplan
+> `Ubuntu 18.04+` 기본 네트워크 설정 도구
+```sh
+sudo nano /etc/netplan/*.yml
+```
+#### 사용 예시
+DHCP
+```yml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+	eth0:
+	  dhcp4: true
+	  dhcp-identifier: mac
+```
+Static IP
+```yml
+# 192.168.x.x
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+	ens3:
+	  addresses: [192.168.1.100/24]
+	  gateway4: 192.168.0.1
+	  nameservers:
+		addresses: [168.126.63.1, 8.8.8.8]
+		
+# 172.16.x.x
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+	enp1s0:
+	  addresses: [172.16.3.100/16]
+	  gateway4: 172.16.0.1
+	  nameservers:
+		addresses: [168.126.63.1, 8.8.8.8]
+```
+Wi-Fi
+```yml
+network:
+  version: 2
+  renderer: NetworkManager
+  wifis:
+	wlan0:
+	  dhcp4: true
+	  access-points:
+		"SSID_NAME":
+		  password: "PASSWORD"
+```
+적용
+```sh
+sudo netplan apply
+```
+### NetworkManager
+> GUI 환경 및 데스크탑에서 널리 사용되는 방식
+#### 사용 예시
+
+nmcli
+```sh
+nmcli dev status           # 모든 장치 상태 확인
+nmcli con show             # 연결 목록 보기
+nmcli dev wifi list        # 주변 Wi-Fi 검색
+```
+
+nmtui
+```sh
+nmtui
+```
+- 텍스트 기반 UI 제공
+- 장치 설정, Wi-Fi 연결, 이름 설정, IP 설정 등 가능
+
+적용
+```sh
+systemctl restart NetworkManager
+```
+
+---
+## 방화벽 설정
+### ufw 
+> `Ubuntu` 계열의 간편한 방화벽 관리 도구
+
+기본 명령어
+```sh
+# ufw 상태 확인
+sudo ufw status
+
+# ufw 활성화/비활성화
+sudo ufw enable
+sudo ufw disable
+
+# 모든 규칙 초기화
+sudo ufw reset
+```
+사용 예시
+```sh
+# 포트로 허용
+sudo ufw allow 22   
+sudo ufw allow 80/tcp
+
+# 서비스 이름으로 허용
+sudo ufw allow 'OpenSSH'
+sudo ufw allow 'Apache Full'
+
+# 특정 IP만 허용
+sudo ufw allow from 192.168.1.100
+sudo ufw allow from 192.168.1.100 to any port 22
+sudo ufw allow from 192.168.0.0/24 to any port 3306
+
+# 특정 인터페이스에만 적용
+sudo ufw allow in on eth0 to any port 22
+
+# 특정 포트 거부
+sudo ufw deny 21
+
+# 규칙 삭제
+sudo ufw delete allow 22
+sudo ufw delete deny 21
+```
+
+### firewalld
+> `RHEL/CentOS` 계열의 동적 방화벽 관리 도구
+
+기본 명령어
+```sh
+sudo systemctl start firewalld
+sudo systemctl stop firewalld
+sudo systemctl enable firewalld
+```
+
+사용 예시
+```sh
+# 서비스 허용
+sudo firewall-cmd --add-service=ssh --permanent
+sudo firewall-cmd --add-service=http --permanent
+
+# 포트 허용
+sudo firewall-cmd --add-port=8080/tcp --permanent
+
+# 특정 IP에서 특정 포트만 허용
+sudo firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="192.168.1.100" port protocol="tcp" port="22" accept'
+
+# 설정 적용 및 상태 확인
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-all
+```
+
+### iptables
+> 전통적인 커널 기반 방화벽 도구
+
+기본 명령어
+```sh
+# 방화벽 규칙 확인
+sudo iptables -L -v -n
+
+# 규칙 초기화 (flush)
+sudo iptables -F
+```
+
+사용 예시
+```sh
+# 포트 허용
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+
+# 특정 IP 차단
+sudo iptables -A INPUT -s 192.168.1.100 -j DROP
+
+# 기본 정책 설정
+sudo iptables -P INPUT DROP
+sudo iptables -P FORWARD DROP
+sudo iptables -P OUTPUT ACCEPT
+
+# 설정 저장
+sudo iptables-save > /etc/iptables/rules.v4
+```
+
+### nftables
+> `iptables`의 후속 도구
+
+기본 명령어
+```sh
+# 현재 전체 방화벽 규칙 보기
+sudo nft list ruleset
+```
+
+사용 예시
+```sh
+# 테이블 및 체인 생성
+sudo nft add table inet filter
+sudo nft add chain inet filter input { type filter hook input priority 0 \; }
+
+# 포트 허용
+sudo nft add rule inet filter input tcp dport 22 accept
+
+# 특정 IP 차단
+sudo nft add rule inet filter input ip saddr 192.168.1.100 drop
+
+# 저장 (Ubuntu/Debian 기준)
+sudo sh -c 'nft list ruleset > /etc/nftables.conf'
+```
