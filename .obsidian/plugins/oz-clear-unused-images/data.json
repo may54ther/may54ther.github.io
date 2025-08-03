@@ -1,0 +1,7 @@
+{
+  "deleteOption": ".trash",
+  "logsModal": true,
+  "excludedFolders": "src/\nstatic/",
+  "ribbonIcon": false,
+  "excludeSubfolders": true
+}

@@ -1,0 +1,31 @@
+{
+  "newFileLocation": "folder",
+  "newFileFolderPath": ".inbox",
+  "promptDelete": false,
+  "newLinkFormat": "absolute",
+  "attachmentFolderPath": "./attachments",
+  "livePreview": true,
+  "alwaysUpdateLinks": true,
+  "showUnsupportedFiles": true,
+  "defaultViewMode": "source",
+  "foldHeading": true,
+  "showInlineTitle": false,
+  "pdfExportSettings": {
+    "includeName": true,
+    "pageSize": "A4",
+    "landscape": false,
+    "margin": "2",
+    "downscalePercent": 100
+  },
+  "spellcheck": false,
+  "propertiesInDocument": "source",
+  "userIgnoreFilters": [
+    "node_modules/",
+    "attachments/",
+    "*.js",
+    "/node_modules//"
+  ],
+  "autoPairMarkdown": false,
+  "autoPairBrackets": true,
+  "smartIndentList": false
+}

@@ -1,0 +1,11 @@
+{
+	"id": "copy-absolute-path",
+	"name": "Copy Absolute Path",
+	"version": "0.3.4",
+	"minAppVersion": "1.8.10",
+	"description": "Copy the system absolute path of files and folders to the clipboard.",
+	"author": "Albert O'Shea",
+	"authorUrl": "https://github.com/AMC-Albert",
+	"fundingUrl": "https://github.com/sponsors/AMC-Albert",
+	"isDesktopOnly": true
+}

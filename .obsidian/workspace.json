@@ -1,0 +1,211 @@
+{
+  "main": {
+    "id": "8a0e6283fde23287",
+    "type": "split",
+    "children": [
+      {
+        "id": "159bed21a44c78e6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1276ba3936b2f365",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/linux/01-debian-and-red-hat.mdx",
+                "mode": "preview",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "01-debian-and-red-hat"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d3265eea07974b42",
+    "type": "split",
+    "children": [
+      {
+        "id": "363d91ea4c6b5ff9",
+        "type": "tabs",
+        "dimension": 70.57926829268293,
+        "children": [
+          {
+            "id": "b2110c6cae030c0d",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "파일 탐색기"
+            }
+          },
+          {
+            "id": "118c15f105619eae",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:Linux",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "byCreatedTime"
+              },
+              "icon": "lucide-search",
+              "title": "검색"
+            }
+          }
+        ]
+      },
+      {
+        "id": "9c96099367683acd",
+        "type": "tabs",
+        "dimension": 29.420731707317074,
+        "children": [
+          {
+            "id": "4e4e5f1797bce3a7",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": true,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "모든 속성"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 323.5,
+    "collapsed": true
+  },
+  "right": {
+    "id": "c58c500e134a5f7b",
+    "type": "split",
+    "children": [
+      {
+        "id": "fec85b477ee03986",
+        "type": "tabs",
+        "dimension": 64.89675516224189,
+        "children": [
+          {
+            "id": "9387c0fccaae004e",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "docs/linux/d/01-commands-for-system-info.mdx",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "01-commands-for-system-info 의 개요"
+            }
+          }
+        ]
+      },
+      {
+        "id": "cfdad93e1d8c2c0f",
+        "type": "tabs",
+        "dimension": 35.10324483775811,
+        "children": [
+          {
+            "id": "0bfb3472e51dea9c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "태그"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 305.5,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "command-palette:명령어 팔레트 열기": true,
+      "switcher:빠른 전환기 열기": true,
+      "templater-obsidian:Templater": true,
+      "table-editor-obsidian:Advanced Tables Toolbar": true,
+      "hide-folders:Show hidden folders": true,
+      "iconic:Open rulebook": true,
+      "obsidian42-brat:BRAT": false
+    }
+  },
+  "active": "1276ba3936b2f365",
+  "lastOpenFiles": [
+    "docs/linux/00-commands/05-frequently-used.mdx",
+    "docs/linux/00-commands/05-.mdx",
+    "docs/linux/00-commands/06-error-fixed.mdx",
+    "docs/linux/00-commands/04-network-settings.mdx",
+    "docs/linux/00-commands/03-commands-for-user-and-groups.mdx",
+    "docs/linux/00-commands/03-user-and-group.mdx",
+    "docs/linux/00-commands/02-system-settings.mdx",
+    "docs/linux/00-commands/01-kernel-and-hardware.mdx",
+    "docs/linux/00-commands/01-system-settings.mdx",
+    "docs/linux/00-commands/01-.mdx",
+    "docs/linux/00-commands/attachments/linux_user_group_permission.md",
+    "docs/linux/00-commands/attachments",
+    "docs/linux/00-linux.md",
+    "blog/2025/08-03-.md",
+    "docs/linux/d/01-commands-for-system-info 1.md",
+    "BRAT-log.md",
+    "docs/linux/attachments/3826965c68159cb141a166936dfcd340c721a3b98a8199cefd3c0bb1b2c860de.png",
+    "docs/linux/attachments/n-H8Xi2-4vCxbFwYdJ1m_lq80uPUcY3bwA51gvraeD6cdhIlL3SvaWs9HfcHDg2d0mbR-0qWy3PfsfJ8ukoa9g.png",
+    "docs/linux/attachments/691ed8089695c0d860e93e35d85443f39c12c0fdb7207bfd77c80844911a0482910e021e7cb4a2a5d8977fff765d59bc6e659a022ed710e084af15789c8d7ce2.png",
+    "docs/linux/attachments/Pasted image 20250803182820.png",
+    "Linux.md",
+    "docs/linux/01-commands-for-system-info.md",
+    "docs/linux/무제.md",
+    "docs/linux/05-commands-for-misc.md",
+    "docs/linux/04-commands-for-network.md",
+    "docs/linux/03-commands-for-user-and-groups.md",
+    "docs/linux/02-commands-for-system-settings.md",
+    "blog/2025/07-27-.md",
+    "03_Note/note_linux.md",
+    "01_Daily/2025/2025-07/2025-07-27.md",
+    "03_Note/note_avmv_build.md",
+    "03_Note/03_Note.md",
+    "04_Wiki/@Inbox/Rust.md",
+    "04_Wiki/@Inbox/Apache2, Tomcat 설치 (+HTTPS).md",
+    "04_Wiki/@Inbox/@Inbox.md",
+    "04_Wiki/Network - IP 대역과 NAT.md",
+    "04_Wiki/가이드/guide_docker.md",
+    "04_Wiki/가이드/guide_CDATA.md",
+    "04_Wiki/가이드/guide_github.md",
+    "04_Wiki/가이드/guide_github_actions.md",
+    "attachments/다운로드.png",
+    "attachments/KakaoTalk_20240704_112709455.jpg",
+    "attachments/js.png",
+    "attachments/c6e6077c-6d8e-454a-b717-f3694fd3a3c7.png",
+    "attachments/images/KakaoTalk_20240704_112709455.jpg",
+    "attachments/images/c6e6077c-6d8e-454a-b717-f3694fd3a3c7.png",
+    "00_Inbox/무제.canvas"
+  ]
+}

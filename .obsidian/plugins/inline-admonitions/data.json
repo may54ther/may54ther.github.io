@@ -1,0 +1,122 @@
+{
+  "version": 2,
+  "inlineAdmonitions": {
+    "e5ce1601-4c52-4e3a-b654-c7ff95591f5a": {
+      "backgroundColor": "#96e3c6",
+      "bgColorOpacityPercent": 26,
+      "color": "#5d8375",
+      "colorOpacityPercent": 100,
+      "slug": "e5ce1601-4c52-4e3a-b654-c7ff95591f5a",
+      "suffixIcon": "",
+      "type": "prefix",
+      "prefix": "TODO",
+      "hideTriggerString": false
+    },
+    "e907216f-d9e5-4b36-bdee-4a5f027b64d0": {
+      "backgroundColor": "#ffdd70",
+      "bgColorOpacityPercent": 30,
+      "color": "#b08717",
+      "colorOpacityPercent": 100,
+      "slug": "e907216f-d9e5-4b36-bdee-4a5f027b64d0",
+      "suffixIcon": "",
+      "type": "prefix",
+      "prefix": "NOTE",
+      "hideTriggerString": false
+    },
+    "bdae43fa-cc3b-4037-995c-b44d8f03f34c": {
+      "backgroundColor": "#1e90ff",
+      "bgColorOpacityPercent": 12,
+      "color": "#1e90ff",
+      "colorOpacityPercent": 100,
+      "slug": "bdae43fa-cc3b-4037-995c-b44d8f03f34c",
+      "suffixIcon": "",
+      "type": "prefix",
+      "prefix": "INFO",
+      "hideTriggerString": false
+    },
+    "d2c69e08-a9d7-4708-b826-1477628a52b3": {
+      "backgroundColor": "#f1f1f1",
+      "bgColorOpacityPercent": 100,
+      "color": "#000000",
+      "colorOpacityPercent": 78,
+      "slug": "d2c69e08-a9d7-4708-b826-1477628a52b3",
+      "prefixIcon": "",
+      "suffixIcon": "",
+      "type": "prefix",
+      "prefix": "DONE",
+      "hideTriggerString": false
+    },
+    "208dd81c-ef56-4228-be62-696ce929be28": {
+      "backgroundColor": "#ffadad",
+      "bgColorOpacityPercent": 30,
+      "color": "#b04545",
+      "colorOpacityPercent": 100,
+      "slug": "208dd81c-ef56-4228-be62-696ce929be28",
+      "prefixIcon": "",
+      "suffixIcon": "",
+      "type": "prefix",
+      "prefix": "ERROR",
+      "hideTriggerString": false
+    },
+    "83f73aed-e329-4270-a99f-09aeb11766f4": {
+      "backgroundColor": "#e68c65",
+      "bgColorOpacityPercent": 15,
+      "color": "#c86237",
+      "colorOpacityPercent": 100,
+      "slug": "83f73aed-e329-4270-a99f-09aeb11766f4",
+      "prefixIcon": "",
+      "suffixIcon": "",
+      "type": "prefix",
+      "prefix": "WIP",
+      "hideTriggerString": false
+    },
+    "85e2a5e0-7da6-4719-893e-e8da3895cf41": {
+      "backgroundColor": "#ec6aaf",
+      "bgColorOpacityPercent": 15,
+      "color": "#b94695",
+      "colorOpacityPercent": 100,
+      "slug": "85e2a5e0-7da6-4719-893e-e8da3895cf41",
+      "prefixIcon": "",
+      "suffixIcon": "",
+      "type": "prefix",
+      "prefix": "BUG",
+      "hideTriggerString": false
+    },
+    "a1602ca4-dc9c-4bf2-a0a4-d88d7749446e": {
+      "backgroundColor": "#c78af0",
+      "bgColorOpacityPercent": 14,
+      "color": "#513592",
+      "colorOpacityPercent": 88,
+      "slug": "a1602ca4-dc9c-4bf2-a0a4-d88d7749446e",
+      "prefixIcon": "",
+      "suffixIcon": "",
+      "type": "prefix",
+      "prefix": "ISSUE",
+      "hideTriggerString": false
+    },
+    "9085af90-1a0c-43ec-9c5c-18c2f7455320": {
+      "backgroundColor": "#000000",
+      "bgColorOpacityPercent": 2,
+      "color": "#c20000",
+      "colorOpacityPercent": 91,
+      "slug": "9085af90-1a0c-43ec-9c5c-18c2f7455320",
+      "prefixIcon": "",
+      "suffixIcon": "",
+      "type": "prefix",
+      "prefix": "CANCELLED",
+      "hideTriggerString": false
+    },
+    "81a6ca75-93a1-4c9f-b1e0-ae34bf2fd27d": {
+      "backgroundColor": "#000000",
+      "bgColorOpacityPercent": 5,
+      "color": "#108bea",
+      "colorOpacityPercent": 100,
+      "slug": "81a6ca75-93a1-4c9f-b1e0-ae34bf2fd27d",
+      "prefixIcon": "",
+      "suffixIcon": "",
+      "type": "prefix",
+      "prefix": "IN_PROGRESS",
+      "hideTriggerString": false
+    }
+  }
+}

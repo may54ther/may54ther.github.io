@@ -1,0 +1,17 @@
+{
+  "baseFontSize": 15,
+  "baseFontSizeAction": true,
+  "interfaceFontFamily": "AppleSDGothicNeoR00",
+  "textFontFamily": "AppleSDGothicNeoR00",
+  "monospaceFontFamily": "JetBrains Mono",
+  "showRibbon": false,
+  "cssTheme": "",
+  "enabledCssSnippets": [
+    "inlineAdmonitionsPluginReadOnly",
+    "obsidian"
+  ],
+  "accentColor": "#414e76",
+  "theme": "moonstone",
+  "showViewHeader": true,
+  "nativeMenus": false
+}

@@ -1,0 +1,41 @@
+{
+  "items": [
+    {
+      "type": "group",
+      "ctime": 1742739069901,
+      "items": [
+        {
+          "type": "group",
+          "ctime": 1742739069901,
+          "items": [],
+          "title": "02_Daily"
+        },
+        {
+          "type": "group",
+          "ctime": 1742739069901,
+          "items": [],
+          "title": "00_Inbox"
+        },
+        {
+          "type": "group",
+          "ctime": 1742739069901,
+          "items": [],
+          "title": "04_Notes"
+        },
+        {
+          "type": "group",
+          "ctime": 1742739069901,
+          "items": [],
+          "title": "03_Work"
+        },
+        {
+          "type": "group",
+          "ctime": 1742739322655,
+          "items": [],
+          "title": "01_Todos"
+        }
+      ],
+      "title": "sortspec"
+    }
+  ]
+}
