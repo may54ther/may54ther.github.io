@@ -1,11 +1,9 @@
 ---
-title: 기타
+title: '자주 사용하는 명령어'
 authors: 'may54ther'
 created_at: '2025-07-26'
 tags: ['#CheatSheet', '#Linux']
 ---
-
-## 시스템 운영
 
 ### 프로세스 조회
 ```sh
@@ -16,32 +14,23 @@ ps -ef | grep [프로세스명]
 netstat -nltp | grep [포트]
 netstat -nltp | grep LISTEN | grep [포트]
 ```
-### 서비스
-설정 파일
+### systemctl
 ```sh
 sudo nano /etc/systemd/system/*.service
 ```
-명령어
+사용 예시
 ```sh
 sudo systemctl enable [서비스명]
 sudo systemctl disable [서비스명]
 
-# 서비스 실행
-service [서비스명] {start|restart|stop|status}
-
-# systemctl
 sudo systemctl {start|restart|stop|status} [서비스명]
 ```
-
----
-## 명령어
 ### bash
 ```sh
 # `sudo`로 실행
 sudo bash -c "명령어"
 sudo bash -c "cd /root && ls"
 ```
-
 ### apt, apt-get
 ```sh
 apt-cache search [패키지명] [검색어]
@@ -52,8 +41,7 @@ apt list -upgradable
 apt list --installed
 apt list [패키지명] --installed
 ```
-
-### tar (압축 및 해제)
+### tar 
 ```sh
 # .tar
 tar -cvf [파일명.tar] [폴더명]
@@ -63,7 +51,6 @@ tar -xvf [파일명.tar]
 tar -zcvf [파일명.tar.gz] [폴더명]
 tar -zxvf [파일명.tar.gz]
 ```
-
 ### rsync
 ```sh
 rsync -av /from/ /to/
@@ -74,7 +61,6 @@ rsync -av  --out-format='%n' --dry-run /from/ /to/ > ~/DIFF_$(date +"%Y%m%d%H%M%
 rsync -av --out-format='%n' --dry-run --exclude='.svn/' --exclude='lib/python/*' /from/ /to/ > ~/DIFF_$(date +"%Y%m%d%H%M%S").txt
 rsync -av --out-format='%n' --dry-run --exclude-from='exclude.txt' /from/ /to/ > ~/DIFF_$(date +"%Y%m%d%H%M%S").txt
 ```
-
 -   `-a` : 아카이브 모드 (권한, 소유자, 타임스탬프 보존 등)
 -   `-v` : 상세 출력 (무엇이 복사되는지 출력)
 -   `--delete`: from 폴더에 없는 파일을 B 폴더에서 삭제
@@ -84,55 +70,3 @@ rsync -av --out-format='%n' --dry-run --exclude-from='exclude.txt' /from/ /to/ >
 -   `--exclude='*.log'`: 특정 파일/폴더 제외
 -   `--exclude-from='exclude.txt'`: 여러 패턴을 텍스트 파일로 지정하여 특정 파일/폴더 들을 제외
 
----
-
-## Errors
-
-#### apt, apt-get 오류
-
--   `CASE 1` Could not get lock /var/lib/dpkg/lock-frontend
-
-    ```sh
-    sudo killall apt apt-get
-
-    sudo rm /var/lib/apt/lists/lock
-    sudo rm /var/cache/apt/archives/lock
-    sudo rm /var/lib/dpkg/lock*
-
-    sudo dpkg --configure -a
-    ```
-
--   `CASE 2` E: Release file for http://kr.archive.ubuntu.com/ubuntu/dists/focal-updates/InRelease is not valid yet (invalid for another 48분 5초). Updates for this repository will not be applied.
-
-    ```sh
-    sudo hwclock --hctosys
-    ```
-
-#### terminator 오류
-
-> ERROR: broadcast 시 값이 두번 입력되는 현상
-
-```sh
-sudo vim /usr/share/terminator/terminator
-```
-
--   파일의 내용을 다음과 같이 수정한다.
-
-```py
-# /usr/share/terminator/terminator
-if __name__ == '__main__':
-	# Workaround for IBus intefering with broadcast when using dead keys
-	# Environment also needs IBUS_DISABLE_SNOOPER=1, or double chars appear
-	# in the receivers.
-	username = pwd.getpwuid(os.getuid()).pw_name
-	# AS-IS (original)
-	# ibus_running = [p for p in psutil.process_iter() if p.name == 'ibus-daemon' and p.username == username]
-	# TO-BE (fixed)
-	ibus_running = [p for p in psutil.process_iter(['name', 'username']) if p.info['name'] == 'ibus-daemon' and p.info['username'] == username]
-	ibus_running = len(ibus_running) > 0
-	if ibus_running:
-		# AS-IS (original)
-	    # os.environ['IBUS_DISABLE_SNOOPER']='1'
-		# TO-BE (fixed)
-	    os.environ['IBUS_DISABLE_SNOOPER']='0'
-```
