@@ -1,0 +1,75 @@
+---
+title: 디스크, 파티션, 볼륨, 블록
+authors: 'may54ther'
+created_at: '2026-04-02'
+tags: ['#CheatSheet', '#Linux']
+---
+
+## 디스크, 파티션, 볼륨, 블록
+
+| **개념** | **레벨**          | **주요 역할**                                |
+| -------- | ----------------- | -------------------------------------------- |
+| 디스크   | 물리적 (Physical) | 실제 데이터가 저장되는 물리 장치             |
+| 파티션   | 논리적 (Logical)  | 하나의 물리적 디스크를 논리적으로 나눈 구역 (연속된 공간)      |
+| 볼륨     | 운영체제 (OS)     | 파일 시스템이 할당되어 사용 준비가 된 저장소 (비연속 공간) |
+| 블록     | 데이터 (Data)     | 데이터를 입출력하는 고정된 최소 단위         |
+
+### 디스크
+
+
+```sh
+# Disk Free, 파일 시스템 전체의 마운트된 디스크 여유 공간과 사용량 확인
+df
+df -h                 # 읽기 쉬운 형식
+df -B MB              # MB 단위
+
+# Disk Usage, 파일이나 디렉토리의 실제 디스크 사용량을 확인
+du [경로]
+du -h [경로]           # 읽기 쉬운 형식
+du -BM [경로]          # MB 단위
+```
+
+### 파티션
+
+
+```sh
+# 파티션 조회
+sudo fdisk -l
+
+# 파티션 편집
+sudo cfdisk /dev/vda  # 파티션 관리 (TUI)
+sudo parted /dev/vda  # 대용량 디스크(2TB+) 및 GPT 관리
+
+# 파티션 확장
+sudo growpart /dev/vda 1
+```
+
+### 볼륨
+
+
+```sh
+sudo vgdisplay        # 볼륨 그룹(VG)
+sudo pvdisplay        # 물리 볼륨(PV)
+sudo lvdisplay        # 논리 볼륨(LV)
+
+sudo cfdisk /dev/vda  # 디스크 파티션 관리 (TUI)
+
+# 파티션 확장 후  실제 파일 시스템 용량을 늘려주는 명령어
+sudo resize2fs /dev/vda1        # ext2/3/4 파일 시스템 전용 확장
+sudo xfs_growfs /mnt/data       # XFS 파일 시스템 전용 확장 (마운트 경로 사용)
+```
+
+### 블록
+
+```sh
+# 블록 장치 정보 (tree)
+lsblk
+lsblk -l
+
+# 장치 정보 (UUID, 시스템 타입)
+blkid
+
+# 커널 수준의 장치 확인
+cat /proc/partitions
+cat /proc/mounts
+```
